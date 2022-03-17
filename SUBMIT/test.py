@@ -7,8 +7,8 @@ import time
 
 
 result = []
-for num_liter in [5,10,20,30]:
-    case = random_generate(num_liter, num_liter)
+for num_liter in [10, 20, 40, 100]:
+    case = random_generate(num_liter, num_liter**2)
     a = time.time()
     MAIN(case[0], case[1], case[2])
     b = time.time()
