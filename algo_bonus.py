@@ -1,6 +1,15 @@
 import numpy as np
 import random
 
+def construct_bool_dict(input_list):
+    if input_list is None:
+        return None
+    result = {}
+    for i in range(1, len(input_list)+1):
+        result[i] = True if input_list[i-1]==1 else False
+        result[-i] = not result[i]
+    return result
+
 def check_validation(cnf_np, bool_mapping):
     """
     check if input cnf_np's output is True
@@ -15,15 +24,15 @@ def check_validation(cnf_np, bool_mapping):
             continue
         else:
             result = False
-            # print(unsatisfied_clauses)
             unsatisfied_clauses = np.append(unsatisfied_clauses, [clause], axis=0)
-            # print(unsatisfied_clauses)
     unsatisfied_clauses = np.delete(unsatisfied_clauses, 0, axis=0)
 
     return result, unsatisfied_clauses
 
-def SAT2_Solver(cnf):
+def SAT2_Solver(num_literals, num_clauses, cnf):
     """
+    :param num_literals: number of literals
+    :param num_clauses: number of clauses
     :param cnf: a cnf expression, in terms of a nested list
     :return: bool, result list(if satisfied) / None(if unsatisfied)
     """
@@ -35,11 +44,11 @@ def SAT2_Solver(cnf):
         if literal > 0:
             boolean_value[literal] = False
             boolean_value[-literal] = True
+        else:
+            boolean_value[literal] = True
+            boolean_value[-literal] = False
 
-    # number of literals
-    num_literals = len([i for i in np.unique(cnf.flatten()) if i>0])
-
-    maximum_step = 100*num_literals**2
+    maximum_step = 100*num_literals**2  # set maximum steps
     step = 0
     satisfiable = False
 
@@ -67,5 +76,4 @@ def SAT2_Solver(cnf):
                 # True 1; False 0
                 result[i-1] = 1 if boolean_value[i] else 0
         return "SATISFIABLE", result
-
     return "UNSATISFIABLE", None

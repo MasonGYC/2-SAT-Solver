@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
+import numpy as np
 
-def SAT2_Solver(cnf):
+def SAT2_Solver(num_literals, num_clauses, cnf):
     """
+    :param num_literals: number of literals
+    :param num_clauses: number of clauses
     :param cnf: a cnf expression, in terms of a nested list
     :return: bool, result list(if satisfied) / None(if unsatisfied)
     """
-    # example input: [[1,2],[-1,2],[-1,-2]]
     cnf = np.array(cnf)
 
     # construct a literal-bool mapping dict
@@ -14,12 +16,11 @@ def SAT2_Solver(cnf):
         if literal > 0:
             boolean_value[literal] = False
             boolean_value[-literal] = True
+        else:
+            boolean_value[literal] = True
+            boolean_value[-literal] = False
 
-    # number of literals
-    num_literals = len([i for i in np.unique(cnf.flatten()) if i>0])
-
-
-    maximum_step = 100*num_literals**2
+    maximum_step = 100*num_literals**2  # set maximum steps
     step = 0
     satisfiable = False
 
@@ -47,5 +48,4 @@ def SAT2_Solver(cnf):
                 # True 1; False 0
                 result[i-1] = 1 if boolean_value[i] else 0
         return "SATISFIABLE", result
-
     return "UNSATISFIABLE", None
