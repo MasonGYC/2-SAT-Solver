@@ -1,4 +1,4 @@
-from radom_case_generator import random_generate
+from SUBMIT.random_case_generator import random_generate
 from algo_bonus import SAT2_Solver
 from algo_final import MAIN
 import time
@@ -7,14 +7,13 @@ import time
 
 
 result = []
-for i in range(1, 11):
-    num_liter = 10**i
-    case = random_generate(num_liter, num_liter**2)
+for num_liter in [5,10,20,30]:
+    case = random_generate(num_liter, num_liter)
     a = time.time()
-    MAIN(num_liter, num_liter**2, case)
+    MAIN(case[0], case[1], case[2])
     b = time.time()
-    SAT2_Solver(num_liter, num_liter**2, case)
+    SAT2_Solver(case[0], case[1], case[2])
     c = time.time()
     result.append([b-a, c-b])
 
-print(result)
+    print(result)

@@ -47,7 +47,7 @@ def random_generate(variable, clause):
 
     return generated_case
 
-def random_generate():
-    v = random.randint(2, 500)      # variables
-    c = random.randint(v//2+1, 500)     # clauses
-    return random_generate(v, c)
+# def random_generate():
+#     v = random.randint(2, 500)      # variables
+#     c = random.randint(v//2+1, 500)     # clauses
+#     return random_generate(v, c)
