@@ -3,15 +3,17 @@ from SAT2_Solver import SAT2_Solver
 from Kosaraju import kosaraju
 import time
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 # the time complexity depends on the number of literals instead of number of clauses
 
-upper_bound = 5
+upper_bound = 20
+factor = 2 # number_literal = n, number_clauses = n*factor
+
 pre_b_a = pre_c_b = 0
-result = np.zeros((upper_bound,2)) #main,sat2
-for num_liter in range(2,upper_bound):
-    case = random_generate(num_liter, num_liter*2)
+result = np.zeros((upper_bound,2)) #kosa, dpll
+for n in range(2,upper_bound):
+    case = random_generate(round(n), round(n*factor))
     a = time.time()
     kosaraju(case[0], case[1], case[2])
     b = time.time()
@@ -24,7 +26,7 @@ for num_liter in range(2,upper_bound):
     if c-b:
         c_b = pre_c_b
     
-    result[num_liter] =(b_a,c_b)
+    result[n] =(b_a,c_b)
     pre_b_a = b-a
     pre_c_b = c-b
     
