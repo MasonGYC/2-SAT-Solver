@@ -5,7 +5,7 @@ def random_generate(variable, clause):
     """
     :param variable: the number of literals
     :param clause: the number of clauses
-    :return: randomly generated 2-SAT expression
+    :return: randomly generated a 2-SAT expression
     """
     generated_case = [variable, clause]
 
@@ -47,7 +47,4 @@ def random_generate(variable, clause):
 
     return generated_case
 
-# def random_generate():
-#     v = random.randint(2, 500)      # variables
-#     c = random.randint(v//2+1, 500)     # clauses
-#     return random_generate(v, c)
+

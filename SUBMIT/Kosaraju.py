@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from base_classes import *
+import numpy as np
 
 def edge(xa,xb,G):
     '''
@@ -42,7 +44,7 @@ def edge(xa,xb,G):
     return G
     
     
-#
+
 def convert_graph(n,m,clauses):
     '''
     convert cnf clauses to vertices and connected edges
@@ -150,14 +152,20 @@ def kosaraju(n,m,clauses):
     return_solution : list/None
         if SATISFIABLE, return a possible solution.
     '''
-    
-    G = convert_graph(n,m,clauses)
-    s = Stack()
-    
     #returns
     res = None
     return_solution = None
     unsat_index = None
+    
+    #check special case
+    if m == 0:
+        return 'SATISFIABLE',unsat_index,None
+    if [] in clauses:
+        return 'UNSATISFIABLE',clauses.index([]),None
+
+
+    G = convert_graph(n,m,clauses)
+    s = Stack()
     
         
     #dfs_first

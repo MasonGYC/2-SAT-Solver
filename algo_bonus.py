@@ -36,6 +36,12 @@ def SAT2_Solver(num_literals, num_clauses, cnf):
     :param cnf: a cnf expression, in terms of a nested list
     :return: bool, result list(if satisfied) / None(if unsatisfied)
     """
+    #check special case
+    if num_clauses == 0:
+        return 'SATISFIABLE',None
+    if [] in cnf:
+        return 'UNSATISFIABLE',None
+
     cnf = np.array(cnf)
 
     # construct a literal-bool mapping dict
@@ -77,3 +83,5 @@ def SAT2_Solver(num_literals, num_clauses, cnf):
                 result[i-1] = 1 if boolean_value[i] else 0
         return "SATISFIABLE", result
     return "UNSATISFIABLE", None
+
+print(SAT2_Solver(0, 0, []))

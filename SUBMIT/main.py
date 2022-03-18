@@ -5,16 +5,20 @@ from construct_bool_dict import construct_bool_dict
 from Kosaraju import kosaraju
 from parse import parse
 from SAT2_Solver import SAT2_Solver
-from random_generate import random_generate
+from random_case_generator import random_generate
+import random
+import time
 
-
-test_cases = random_generate()
-
+test_cases = []
+for i in range(10):
+    random.seed(int(time.time()))
+    test_cases.append(random_generate(i*2,i*3)) 
+print("test_cases: ",test_cases)
 
 for case in test_cases:
     print("testcase: ",case)
     res_kosa, unsat, sol_kosa = kosaraju(case[0],case[1],case[2])
-    res_ori, sol_ori = SAT2_Solver(case[2])
+    res_ori, sol_ori = SAT2_Solver(case[0],case[1],case[2])
      
     if res_kosa == res_ori:
         print("same result: ", res_kosa)

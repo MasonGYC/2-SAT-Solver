@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
+from check_validation import check_validation
+import random
 
 def SAT2_Solver(num_literals, num_clauses, cnf):
     """
@@ -8,6 +10,12 @@ def SAT2_Solver(num_literals, num_clauses, cnf):
     :param cnf: a cnf expression, in terms of a nested list
     :return: bool, result list(if satisfied) / None(if unsatisfied)
     """
+    #check special case
+    if num_clauses == 0:
+        return 'SATISFIABLE',None
+    if [] in cnf:
+        return 'UNSATISFIABLE',None
+    
     cnf = np.array(cnf)
 
     # construct a literal-bool mapping dict
