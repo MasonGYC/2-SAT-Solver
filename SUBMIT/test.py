@@ -3,7 +3,7 @@ from SAT2_Solver import SAT2_Solver
 from Kosaraju import kosaraju
 import time
 import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 # the time complexity depends on the number of literals instead of number of clauses
 
